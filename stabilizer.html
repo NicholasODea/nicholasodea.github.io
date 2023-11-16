@@ -11,7 +11,7 @@
 
 
 
-<title>Index</title>
+<title>Counting frustration-free ground states of generalized stabilizer Hamiltonians</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,22 +348,215 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Index</h1>
+<h1 class="title toc-ignore">Counting frustration-free ground states of
+generalized stabilizer Hamiltonians</h1>
 
 </div>
 
 
-<p><a href="https://nicholasodea.github.io/q-state-potts.html">Does
-<span class="math inline">\(3\)</span>-state Potts really need the full
-<span class="math inline">\(S_3\)</span> symmetry?</a></p>
-<p><a href="https://nicholasodea.github.io/finite-range-instability.html">Are
-the <span class="math inline">\(3\)</span> and <span class="math inline">\(4\)</span>-state Potts models unstable to
-symmetric <em>short-range</em> interactions?</a></p>
-<p><a href="https://nicholasodea.github.io/SPT-trivial-constraints.html">Constraints
-on universality classes of SPT-trivial phase transitions in 1d</a></p>
-<p><a href="https://nicholasodea.github.io/stabilizer.html">Counting
-frustration-free ground states of generalized stabilizer
-Hamiltonians</a></p>
+<p>This note sketches out a nice set of Hamiltonians for which it’s
+straightforward to deduce the number of frustration-free ground states.
+This note also gives an example of how to use the “rectangular
+projectors” sometimes used in exact diagonalization for more direct
+theoretical purposes. I was motivated to write these notes following a
+conversation with Sayak Bhachatterjee – he introduced me to an
+interesting Hamiltonian with terms satisfying the three conditions
+below.</p>
+<div id="the-conditions-and-the-result" class="section level3">
+<h3>The conditions and the result</h3>
+<p>Consider a set of <span class="math inline">\(N_{gen}\)</span>
+Hermitian operators <span class="math inline">\(\{A_i |
+i=1,...,N_{gen}\}\)</span> (all living in the same Hilbert space of,
+say, dimension <span class="math inline">\(D\)</span>) satisfying the
+following three conditions:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\([A_i, A_j] = 0\)</span>.</li>
+<li><span class="math inline">\(A_i^2 = I\)</span>.</li>
+<li><span class="math inline">\(Tr[ \prod_{i; i \in \mathcal{S}} A_i] =
+0\)</span> for all sets of indices <span class="math inline">\(\mathcal{S}\)</span> with at least one
+element.</li>
+</ol>
+<p>I’m imagining these operators <span class="math inline">\(\{A_i\}\)</span> to be the terms of some
+Hamiltonian, specifically <span class="math inline">\(H = - \sum_i c_i
+A_i\)</span> with <span class="math inline">\(c_i &gt;0\)</span>. Then I
+claim that <span class="math inline">\(H\)</span> has exactly <span class="math inline">\(\frac{D}{2^{N_{gen} }}\)</span> frustration-free
+ground states each with energy <span class="math inline">\(-\sum_i
+c_i\)</span>.</p>
+<p>Note that for any set of indices <span class="math inline">\(S\)</span>, we can also add terms to the
+Hamiltonian of the form <span class="math inline">\(- c_\mathcal{T}
+\prod_{i; i \in \mathcal{T}} A_i\)</span> for <span class="math inline">\(c_\mathcal{T}&gt;0\)</span>; adding such terms
+will not frustrate the Hamiltonian, will keep the <span class="math inline">\(\frac{D}{2^{N_{gen}}}\)</span> ground states as
+ground states, and will lower the ground states’ energy by <span class="math inline">\(- c_\mathcal{T}\)</span>.</p>
+</div>
+<div id="a-canonical-example-and-a-more-exciting-example" class="section level3">
+<h3>A canonical example and a more exciting example</h3>
+<p>Consider the case of a 1d spin chain <span class="math inline">\(-\sum_{i=1}^{L-1} Z_i Z_{i+1}\)</span>. The set of
+<span class="math inline">\(\{Z_i Z_{i+1} | i =1,...,L-1\}\)</span>
+satisfies our hypotheses, and so we see that <span class="math inline">\(-\sum_{i=1}^{L-1} Z_i Z_{i+1}\)</span> has <span class="math inline">\(2^{L-(L-1)} = 2\)</span> ground states with energy
+<span class="math inline">\(-(L-1)\)</span>. As an aside, we can also
+add <span class="math inline">\(-Z_{L} Z_1 = - \prod_{i=1}^{L-1} Z_i
+Z_{i+1}\)</span> to our Hamiltonian to see that <span class="math inline">\(-\sum_{i=1}^L Z_i Z_{i+1}\)</span> has two ground
+states of energy <span class="math inline">\(-L\)</span>.</p>
+<p>A more curious example is given by <span class="math inline">\(-\sum_{i=1}^{x-1} Z_i Z_{i+1} -\sum_{i=x}^{L-1}
+X_i X_{i+1}\)</span>. This is somewhat similar to the example of <span class="math inline">\(-\sum_{i=1}^{L-1} Z_i Z_{i+1}\)</span>, in that
+it’s a sum of <span class="math inline">\(L-1\)</span> Ising-type terms,
+but it has the twist that <span class="math inline">\(Z_{x-1}
+Z_x\)</span> and <span class="math inline">\(X_x X_{x+1}\)</span>
+anticommute. Can you guess how many ground states it has?</p>
+<p>Consider the set of operators <span class="math inline">\(\{Z_i
+Z_{i+1} | i=1,..,x-2 \} \cup \{ \frac{Z_{x-1} Z_{x} + X_{x}
+X_{x+1}}{\sqrt{2}} \} \cup \{X_i X_{i+1} | i=x+1,..,L-1 \}\)</span>.
+There are <span class="math inline">\(L-2\)</span> operators in this
+set, and they all commute. Note that they all square to the identity; in
+particular, note that <span class="math inline">\((Z_{x-1} Z_{x} + X_{x}
+X_{x+1})^2 = 2 I\)</span> (if we have two anticommuting Pauli strings
+<span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, then <span class="math inline">\((A+B)^2 = A^2 + AB + BA + B^2 = I + 0 + I =
+2I\)</span>). Finally, it’s straightforward to check that the trace of
+any nontrivial product of these operators is zero. Thus we must have
+<span class="math inline">\(2^{L-(L-2)}=4\)</span> ground states with a
+ground state energy of <span class="math inline">\(-(L-3)-\sqrt{2}\)</span>.</p>
+<p>(As an aside, the four ground states can be understood as the four
+ways of interpolating from one of the two ground states of <span class="math inline">\(ZZ\)</span> on the left to one of the two ground
+states of <span class="math inline">\(XX\)</span> on the right, passing
+through an appropriate eigenstate of <span class="math inline">\(\pm X
+\pm Z\)</span> on site <span class="math inline">\(x\)</span>.)</p>
+</div>
+<div id="a-couple-key-relations-for-rectangular-projectors" class="section level3">
+<h3>A couple key relations for rectangular projectors</h3>
+<p>The proof will involve rectangular projectors, and here’s roughly how
+I view them.</p>
+<p>Rectangular projectors appear in exact diagonalization as a way of
+extracting a block out of some block-diagonal matrix. Typically the
+block-diagonal structure of the matrix can be interpreted as coming from
+some symmetry, with the rectangular projector projecting into a symmetry
+sector labeled by an eigenvalue of the symmetry.</p>
+<p>I’ll be considering a Hilbert space of some dimension <span class="math inline">\(D\)</span>, and <span class="math inline">\(|\psi_i\rangle\)</span> will refer to a state in
+some appropriate orthonormal basis of that space. I’ll also be
+considering Hilbert spaces of some reduced dimension <span class="math inline">\(D&#39;\)</span> (namely the dimension of some
+symmetry sector), and <span class="math inline">\(\rangle
+i\rangle\)</span> will refer to an appropriate orthonormal basis state
+living in that space. Note that a square projector of size <span class="math inline">\(D \times D\)</span> onto a space of size <span class="math inline">\(D&#39;\)</span> <span class="math inline">\(P =
+\sum_{i=1}^{D&#39;} |\psi_i\rangle \langle \psi_i|\)</span> and a
+rectangular projector <span class="math inline">\(R =
+\sum_{i=1}^{D&#39;} |i\rangle \langle \psi_i|\)</span> of size <span class="math inline">\(D&#39; \times D\)</span> are trivially related by
+<span class="math inline">\(P = R^\dagger R\)</span>, and we also have
+that <span class="math inline">\(R R^\dagger = I\)</span> on the space
+of size <span class="math inline">\(D&#39;\)</span>.</p>
+</div>
+<div id="sketching-a-proof" class="section level3">
+<h3>Sketching a proof</h3>
+<p>Given some <span class="math inline">\(H\)</span> that commutes with
+all of the operators <span class="math inline">\(\{A_i\}\)</span>
+satisfying the three properties at top, our aim is to project into the
+sector where all the <span class="math inline">\(A_i\)</span> take on
+their maximum eigenvalues. For an <span class="math inline">\(H\)</span>
+that is a linear combination of the <span class="math inline">\(A_i\)</span> with negative coefficients, that
+sector exactly contains the frustration-free ground states. I’ll take
+the Hilbert space dimension to be <span class="math inline">\(D\)</span>.</p>
+<p>We can iteratively construct the relevant projector. Note that
+condition 2 means <span class="math inline">\(A_i\)</span> has
+eigenvalues <span class="math inline">\(+1\)</span> and <span class="math inline">\(-1\)</span>, so <span class="math inline">\(\frac{1+A_i}{2}\)</span> is a projector onto the
+eigenspace of <span class="math inline">\(A_i\)</span> with eigenvalue
+<span class="math inline">\(1\)</span>. Note that condition 3 means that
+<span class="math inline">\(Tr[A_i]=0\)</span>, so that the multiplicity
+of the sector with eigenvalue <span class="math inline">\(+1\)</span>
+and the multiplicity of the sector with eigenvalue of <span class="math inline">\(-1\)</span> under <span class="math inline">\(A_i\)</span> will be equal, and hence equal to
+half the Hilbert space dimensions of <span class="math inline">\(D/2\)</span>.</p>
+<p>Denote by <span class="math inline">\(P_1 = \frac{1+A_1}{2}\)</span>
+the <span class="math inline">\(D\)</span> by <span class="math inline">\(D\)</span> square projector onto the <span class="math inline">\(+1\)</span> eigenspace of <span class="math inline">\(A_1\)</span>, and denote by <span class="math inline">\(R_1\)</span> the corresponding <span class="math inline">\(D/2 \times D\)</span> rectangular projector. We’ll
+be using <span class="math inline">\(R_1^\dagger R_1 = P_1 =
+\frac{1+A_1}{2}\)</span> and <span class="math inline">\(R_1 R_1^\dagger
+= I\)</span> (on the smaller space) freely. Note that <span class="math inline">\(R_1 H R_1^\dagger\)</span> is the Hamiltonian
+projected into the <span class="math inline">\(D/2\)</span>-dimensional
+space where <span class="math inline">\(A_1=1\)</span>.</p>
+<p>The key claim (a version of which we will ultimately use inductively)
+is that the set of <span class="math inline">\(N_g -1\)</span> operators
+<span class="math inline">\(\{R_1 A_i R_1^\dagger|
+i=2,...,N_{gen}\}\)</span> again satisfies our three conditions (now
+within a Hilbert space of dimension <span class="math inline">\(D/2\)</span>).</p>
+<p>Let’s check that <span class="math inline">\(\{R_1 A_i R_1^\dagger|
+i=2,...,N_{gen}\}\)</span> still satisfy our conditions.</p>
+<p>1: <span class="math display">\[
+\begin{split}
+[R_1 A_i R_1^\dagger, R_1 A_j R_1^\dagger] &amp; = R_1 A_i R_1^\dagger
+R_1 A_j R_1^\dagger - R_1 A_j R_1^\dagger R_1 A_i R_1^\dagger \\
+&amp; = R_1 R_1^\dagger R_1 A_i A_j R_1^\dagger - R_1 R_1^\dagger R_1
+A_j A_i R_1^\dagger \\
+&amp; = R_1 R_1^\dagger R_1 [A_i, A_j] R_1^\dagger \\
+&amp; = 0
+\end{split}
+\]</span> Here we used the fact that the <span class="math inline">\(\{A_i\}\)</span> satisfy condition 1. Since <span class="math inline">\(R_1^\dagger R_1 = \frac{1+A_1}{2}\)</span>,
+condition <span class="math inline">\(1\)</span> means that <span class="math inline">\([A_i, R_1^\dagger R_1] = 0\)</span>, which we used
+in going from the first to second line.</p>
+<p>2: <span class="math display">\[
+\begin{split}
+(R_1 A_i R_1^\dagger)^2  &amp; = R_1 A_i R_1^\dagger R_1 A_i R_1^\dagger
+\\
+&amp; = R_1 R_1^\dagger R_1 A_i^2 R_1^\dagger \\
+&amp; = R_1 R_1^\dagger R_1 R_1^\dagger \\
+&amp; = I
+\end{split}
+\]</span> Here we used conditions <span class="math inline">\(1\)</span>
+and <span class="math inline">\(2\)</span> as applied to <span class="math inline">\(\{ A_i \}\)</span>. In the final line, we used the
+property of the rectangular projectors that <span class="math inline">\(R_1 R_1^\dagger\)</span> is an identity on the
+smaller space.</p>
+<p>3: <span class="math display">\[\begin{split}
+Tr[ \prod_{i; i \in \mathcal{S}} R_1 A_i R_1^\dagger]  &amp; = Tr[
+\prod_{i; i \in \mathcal{S}} R_1^\dagger R_1 A_i ] \\
+&amp; = Tr[ \prod_{i; i \in \mathcal{S}} \frac{1+A_1}{2} A_i ] \\
+&amp; = 0 \\
+\end{split} \]</span></p>
+<p>Here we used cyclicity of the trace, the definition of <span class="math inline">\(R_1\)</span>, and condition <span class="math inline">\(3\)</span> as applied to <span class="math inline">\(\{ A_i \}\)</span>.</p>
+<p>Because we see that <span class="math inline">\(\{R_1 A_i
+R_1^\dagger| i=2,...,N_{gen}\}\)</span> inherit the three conditions
+from <span class="math inline">\(\{A_i| i=1,...,N_{gen}\}\)</span>, we
+can proceed to make the <span class="math inline">\(D/2 \times
+D/2\)</span> square projector <span class="math inline">\(P_2 =
+\frac{1+R_1 A_2 R_1^\dagger}{2}\)</span> and the corresponding <span class="math inline">\(D/4 \times D/2\)</span> rectangular projector
+<span class="math inline">\(R_2\)</span>, and we’ll consider <span class="math inline">\({P_2 H P_2^\dagger}\)</span> and <span class="math inline">\(\{R_2 A_i R_2^\dagger| i=3,...,N_{gen}\}\)</span>.
+We can iterate this procedure, and we’ll see that that <span class="math inline">\(\{R_{k+1} A_i R_{k+1}^\dagger|
+i=k+2,...,N_{gen}\}\)</span> inherits the three conditions from <span class="math inline">\(\{A_i| i=1,...,N_{gen}\}\)</span>. That is, as we
+narrow the Hilbert space to be in the <span class="math inline">\(+1\)</span> eigenspace of more and more of the
+<span class="math inline">\(A_i\)</span>, we halve the space each time
+until we are left with a <span class="math inline">\(\frac{D}{2^{N_g}}\)</span> dimensional sector
+where all of the <span class="math inline">\(A_i\)</span> are satisfied,
+completing our sketch of the proof.</p>
+</div>
+<div id="parting-thoughts" class="section level3">
+<h3>Parting thoughts</h3>
+<p>I want to emphasize that condition <span class="math inline">\(3\)</span> is an important one. While conditions
+<span class="math inline">\(1\)</span>, <span class="math inline">\(2\)</span>, and <span class="math inline">\(Tr[A_i] =0\)</span> (a weaker version of <span class="math inline">\(3\)</span>) show that each of the <span class="math inline">\(A_i\)</span> has half of its eigenvalues being
+<span class="math inline">\(+1\)</span>, condition <span class="math inline">\(3\)</span> also makes sure that as we iterate the
+procedure, the new <span class="math inline">\(R_k A_i
+R_k^\dagger\)</span> we get still satisfy <span class="math inline">\(Tr[R_k A_i R_k^\dagger]=0\)</span> – roughly, that
+there isn’t any correlation between the <span class="math inline">\(+1\)</span> eigenspaces of the <span class="math inline">\(A_i\)</span> and hence that as we go through the
+procedure we keep halving the Hilbert space dimension. There may be some
+ways to weaken condition <span class="math inline">\(3\)</span>, but
+it’s been satisfied in the cases I’ve considered.</p>
+<p>I also want to emphasize that perhaps I’ve used the terminology
+“frustration-free” a little loosely. For example, if I view the
+Hamiltonian <span class="math inline">\(-\sum_{i=1}^{x-1} Z_i Z_{i+1}
+-\sum_{i=x}^{L-1} X_i X_{i+1}\)</span> as composed of a linear
+combination of the operators in <span class="math inline">\(\{Z_i
+Z_{i+1} | i=1,..,x-2 \} \cup \{ \frac{Z_{x-1} Z_{x} + X_{x}
+X_{x+1}}{\sqrt{2}} \} \cup \{X_i X_{i+1} | i=x+1,..,L-1 \}\)</span>,
+then I showed above that there are <span class="math inline">\(4\)</span> frustration-free ground states.
+However, if I view the Hamiltonian as composed of <span class="math inline">\(\{Z_i Z_{i+1} | i=1,..,x-1 \} \cup \{X_i X_{i+1} |
+i=x,..,L-1 \}\)</span>, then the ground state is frustrated for the
+reason that <span class="math inline">\(Z_{x-1} Z_x\)</span> and <span class="math inline">\(X_{x} X_{x-1}\)</span> don’t share a <span class="math inline">\(+1\)</span> eigenbasis. I’ve used the phrase
+frustration-free for whenever I could decompose <span class="math inline">\(H\)</span> into a negative linear combination of a
+set of terms <span class="math inline">\(\{ A_i \}\)</span> satisfying
+my three conditions.</p>
+<p>I also have a few questions. On adding perturbations that don’t fit
+into the <span class="math inline">\(\{ A_i \}\)</span> framework above,
+can we tell which perturbations will keep the ground states degenerate
+in the thermodynamic limit and which will lift the degeneracies? I
+phrased these results largely in terms of Hamiltonian ground state
+spaces, but they can also be interpreted as giving code spaces. For the
+more general frustration-free cases like <span class="math inline">\(-\sum_{i=1}^{x-1} Z_i Z_{i+1} -\sum_{i=x}^{L-1}
+X_i X_{i+1}\)</span>, is there a meaningful generalization of the
+logical operators that one sees in Pauli stabilizer codes?</p>
+</div>
 
 
 
